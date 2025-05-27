@@ -16,4 +16,18 @@ def letter_count (book_string):
 		else:
 			text_dict[letter.lower()] = 1
 	
-	print (text_dict)
+	return text_dict
+
+def sort_value (value):
+	return value["num"]
+
+def sort_on (passed_dict):
+	
+	dict_list = []
+	for letter in passed_dict:
+		temp_dict= {}
+		temp_dict ["char"] = letter
+		temp_dict ["num"] = passed_dict[letter]
+		dict_list.append(temp_dict)
+	dict_list.sort(reverse=True, key=sort_value )
+	return dict_list
