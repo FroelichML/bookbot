@@ -1,3 +1,4 @@
+import sys
 from stats import word_count
 from stats import letter_count
 from stats import sort_on
@@ -9,21 +10,25 @@ def get_book_text (path_to_file):
 	return file_contents
 
 def main():
-	book_text = get_book_text("books/frankenstein.txt")
-	
-	print ("============ BOOKBOT ============")
-	print ("Analyzing book found at books/frankenstein.txt...")
-	print ("----------- Word Count ----------")
-	print (f"Found {word_count(book_text)} total words")
-	print ("--------- Character Count -------")
-	letter_dict = letter_count(book_text)
-	list_print = sort_on(letter_dict)
-	for list in list_print:
-		if list["char"].isalpha():
-			print (f"{list["char"]}: {list["num"]}")
-		else: 
-			pass
-	print ("============= END ===============")
+	if len(sys.argv) != 2:
+		print("Usage: python3 main.py <path_to_book>")
+		sys.exit(1)
+
+	else:
+		book_text = get_book_text(sys.argv[1])
+		print ("============ BOOKBOT ============")
+		print ("Analyzing book found at ")
+		print ("----------- Word Count ----------")
+		print (f"Found {word_count(book_text)} total words")
+		print ("--------- Character Count -------")
+		letter_dict = letter_count(book_text)
+		list_print = sort_on(letter_dict)
+		for list in list_print:
+			if list["char"].isalpha():
+				print (f"{list["char"]}: {list["num"]}")
+			else: 
+				pass
+		print("============= END ===============")
 
 
 
